@@ -54,8 +54,8 @@ function [W1,W2,CC,HH,BB,DD,FF] = train_DOCMH0(XTrain_new,YTrain_new,LTrain_new,
         W2= ((B_t- dri2*e)*X2_t')/(X2_t*X2_t'+ (gamma/xi2)*eye(doT));
 
         %Add drift
-        dri1= xi1*(B_t-W1*X1_t)*e'/size(e,2);
-        dri2= xi2*(B_t-W2*X2_t)*e'/size(e,2);
+        dri1= xi1*(W1*X1_t-B_t)*e'/size(e,2);
+        dri2= xi2*(W2*X2_t-B_t)*e'/size(e,2);
         
         %B
         B_t = sign(R*V_t+alpha*G*Y_t+2*beta*r*(V_t*U_t')*U_t...
